@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "outDir": "dist",
     "module": "esnext",
     "lib": ["dom", "esnext"],
@@ -15,7 +16,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "example"]
