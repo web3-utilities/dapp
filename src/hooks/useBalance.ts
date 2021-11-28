@@ -23,6 +23,7 @@ export const useBalance = () => {
 
 export const useTokenBalances = (addresses: string[], account?: string | null | undefined) => {
   const { library } = useWeb3()
+
   const calls = useMemo((): MulticallCall[] => {
     if (!addresses) return []
     return addresses.map((address) => {

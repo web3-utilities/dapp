@@ -5,6 +5,7 @@ import { MULTICALL_ADDRESSES } from '../constants/multicall'
 import MULTICALL_ABI from '../abis/Multicall.json'
 import { MulticallCall } from '../interfaces/contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useBlockNumber } from './helper'
 
 export const useMulticallContract = (): Contract | null => {
   const { chainId } = useWeb3()
@@ -14,6 +15,7 @@ export const useMulticallContract = (): Contract | null => {
 export const useMulticall = (calls: MulticallCall[]) => {
   const multicallContract = useMulticallContract()
   const [result, setResult] = useState<any[]>()
+  const number = useBlockNumber()
 
   const inputs = useMemo(
     () =>
@@ -40,7 +42,7 @@ export const useMulticall = (calls: MulticallCall[]) => {
       call.contract?.interface.decodeFunctionResult(call.method, result.returnData[i])
     )
     setResult(r)
-  }, [multicallContract, inputs])
+  }, [multicallContract, inputs, number])
 
   useEffect(() => {
     handle().catch((e) => console.error(e))
