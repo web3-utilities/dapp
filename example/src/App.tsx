@@ -6,7 +6,6 @@ import {
   ellipseAddress,
   MulticallCall,
   useBalance,
-  useDApp,
   useMulticall,
   useENSName,
   useContract
