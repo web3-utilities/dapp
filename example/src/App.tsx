@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Box, Button } from '@mui/material'
 import { injectedConnector } from './connectors'
 import {
@@ -6,15 +6,16 @@ import {
   ellipseAddress,
   MulticallCall,
   useBalance,
-  useMulticall,
-  useENSName,
+  useBlockNumber,
   useContract,
+  useENSName,
+  useMulticall,
   useWeb3
 } from '@w3u/useWeb3'
 import ERC20ABI from './abis/ERC20.json'
 
 const App = () => {
-  const { library, account, activate } = useWeb3()
+  const { account, activate } = useWeb3()
   const ensName = useENSName(account ?? '')
   const connect = () => activate(injectedConnector, (e) => console.error(e), true)
   const balance = useBalance()
@@ -27,18 +28,8 @@ const App = () => {
     ]
   }, [usdtContract, daiContract, account])
 
-  useEffect(() => {
-    if (!library) return
-    library.on('block', (blockNumber: number) => {
-      console.log(blockNumber)
-    })
-
-    return () => {
-      console.log('remove')
-      library.removeListener('block')
-    }
-  }, [library])
-
+  const blockNumber = useBlockNumber()
+  console.log(blockNumber)
   const results = useMulticall(calls)
 
   return (
