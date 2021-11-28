@@ -16,17 +16,17 @@ export interface ConfigContext {
   supportedChainIDs: number[]
 }
 
-export const Context = createContext<ConfigContext>({supportedChainIDs: [1]})
+export const Context = createContext<ConfigContext>({ supportedChainIDs: [1] })
 
 interface Web3ProviderArgs {
   config?: ConfigContext
   children: JSX.Element
 }
 
-export const Web3Provider = ({children }: Web3ProviderArgs) => {
+export const Web3Provider = ({ children }: Web3ProviderArgs) => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-        <Keepalive>{children}</Keepalive>
+      <Keepalive>{children}</Keepalive>
     </Web3ReactProvider>
   )
 }

@@ -19,7 +19,7 @@ npm install --save useWeb3
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'dapp'
+import MyComponent from 'useWeb3'
 import 'dapp/dist/index.css'
 
 class Example extends Component {

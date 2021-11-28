@@ -1,7 +1,7 @@
 import { useKeepalive } from '../../hooks'
 
 export const Keepalive = ({ children }: { children: JSX.Element }) => {
-  useKeepalive()
+  const tried = useKeepalive()
 
-  return children
+  return !tried ? null : children
 }

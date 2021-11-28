@@ -8,12 +8,13 @@ import {
   useBalance,
   useMulticall,
   useENSName,
-  useContract
+  useContract,
+  useWeb3
 } from '@w3u/useWeb3'
 import ERC20ABI from './abis/ERC20.json'
 
 const App = () => {
-  const { library, account, activate } = useDApp()
+  const { library, account, activate } = useWeb3()
   const ensName = useENSName(account ?? '')
   const connect = () => activate(injectedConnector, (e) => console.error(e), true)
   const balance = useBalance()
