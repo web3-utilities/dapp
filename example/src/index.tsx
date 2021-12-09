@@ -4,10 +4,13 @@ import App from './App'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { theme } from './themes/style'
 import { Web3Provider } from '@w3u/useWeb3'
+import {CHAIN_BSC, CHAIN_ETHER } from '@w3u/chains'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Web3Provider>
+    <Web3Provider config={{supportedChainIDs: [
+      CHAIN_ETHER, CHAIN_BSC
+      ]}}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />

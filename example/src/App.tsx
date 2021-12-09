@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { Box, Button } from '@mui/material'
-import { injectedConnector } from './connectors'
 import {
   displayBalance,
   ellipseAddress,
@@ -15,7 +14,7 @@ import {
 import ERC20ABI from './abis/ERC20.json'
 
 const App = () => {
-  const { account, activate } = useWeb3()
+  const { account, activate, injectedConnector } = useWeb3()
   const ensName = useENSName(account ?? '')
   const connect = () => activate(injectedConnector, (e) => console.error(e), true)
   const balance = useBalance()
