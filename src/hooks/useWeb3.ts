@@ -1,19 +1,21 @@
 import { useWeb3React } from '@web3-react/core'
-import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { useContext } from 'react'
-import { InjectedConnector } from '@web3-react/injected-connector'
 import { Context } from '../contexts'
-
-export interface Web3ContextInterface extends Web3ReactContextInterface {
-  injectedConnector: InjectedConnector
-}
+import { Web3ContextInterface } from '../models/interface'
+import { generateConnectors } from '../connectors'
 
 export const useWeb3 = (): Web3ContextInterface => {
   const config = useContext(Context)
-  const result = useWeb3React()
-  const injectedConnector = new InjectedConnector({
-    supportedChainIds: config.supportedChainIDs
-  })
+  if (config === null) {
+    throw new Error('Please wrap your app with <Web3Provider />')
+  }
 
-  return {...result, injectedConnector}
+  const result = useWeb3React()
+
+  const connectors = generateConnectors(config)
+
+  return {
+    ...result,
+    connectors
+  }
 }
