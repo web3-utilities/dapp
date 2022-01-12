@@ -1,4 +1,5 @@
-import { createContext } from "react";
-import { ConfigContext } from "../models";
+import { createContext } from 'react'
+import { GlobalContextInterface } from '../models'
+import { DEFAULT_GLOBAL_CONTEXT } from '../constants/default'
 
-export const Context = createContext<ConfigContext>({ supportedChainIDs: [1] })
+export const GlobalContext = createContext<GlobalContextInterface>(DEFAULT_GLOBAL_CONTEXT)

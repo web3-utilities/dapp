@@ -3,9 +3,10 @@ import { Web3ReactProvider } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { ExternalProvider, JsonRpcFetchFunc } from '@ethersproject/providers'
 import { Keepalive } from '../components/Keepalive'
-import { ConfigContext } from '../models'
 import { DEFAULT_CONFIG } from '../constants/default'
-import { Context } from '../contexts'
+import { GlobalContext } from '../contexts'
+import { generateConnectors } from '../connectors'
+import { ConfigInterface } from '../models'
 
 const getLibrary = (
   provider: ExternalProvider | JsonRpcFetchFunc
@@ -16,18 +17,25 @@ const getLibrary = (
 }
 
 interface Web3ProviderArgs {
-  config?: ConfigContext
+  config?: ConfigInterface
   children: JSX.Element
 }
 
 export const Web3Provider = ({ children, config }: Web3ProviderArgs) => {
   const mergedConfig = { ...DEFAULT_CONFIG, ...config }
 
+  const connectors = generateConnectors(mergedConfig)
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Context.Provider value={mergedConfig}>
+      <GlobalContext.Provider
+        value={{
+          ...mergedConfig,
+          connectors
+        }}
+      >
         <Keepalive>{children}</Keepalive>
-      </Context.Provider>
+      </GlobalContext.Provider>
     </Web3ReactProvider>
   )
 }

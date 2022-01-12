@@ -12,3 +12,13 @@ export interface Connectors {
 export interface Web3ContextInterface extends Web3ReactContextInterface {
   connectors: Connectors
 }
+
+export interface ConfigInterface {
+  supportedChainIDs: number[]
+  walletLinkAppName?: string
+  walletLinkLogoUrl?: string
+}
+
+export interface GlobalContextInterface extends ConfigInterface {
+  connectors: Connectors
+}

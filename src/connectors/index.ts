@@ -1,17 +1,17 @@
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import { Connectors } from '../models/interface'
-import { ConfigContext } from '../models'
+import { ConfigInterface, Connectors } from '../models'
+import { CHAIN_ETHER } from '@w3u/chains'
 
-export const generateConnectors = (config: ConfigContext): Connectors => {
+export const generateConnectors = (config: ConfigInterface): Connectors => {
   const injectedConnector = new InjectedConnector({
     supportedChainIds: config.supportedChainIDs
   })
 
   const walletConnector = new WalletConnectConnector({
     rpc: {
-      1: 'https://mainnet.infura.io/v3/2543dbcf4d8c4ed29a8cf6a159f2700e'
+      [CHAIN_ETHER]: 'https://mainnet.infura.io/v3/2543dbcf4d8c4ed29a8cf6a159f2700e'
     },
     bridge: 'https://bridge.walletconnect.org',
     qrcode: true
@@ -19,7 +19,7 @@ export const generateConnectors = (config: ConfigContext): Connectors => {
 
   const walletLinkConnector = new WalletLinkConnector({
     url: 'https://mainnet.infura.io/v3/2543dbcf4d8c4ed29a8cf6a159f2700e',
-    appName: config.walletLinkAppName,
+    appName: config.walletLinkAppName || '',
     appLogoUrl: config.walletLinkLogoUrl
   })
 

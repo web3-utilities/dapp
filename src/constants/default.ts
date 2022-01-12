@@ -1,8 +1,14 @@
 import { CHAIN_ETHER } from '@w3u/chains'
-import { ConfigContext } from '../models'
+import { ConfigInterface, GlobalContextInterface } from '../models'
+import { generateConnectors } from '../connectors'
 
-export const DEFAULT_CONFIG: ConfigContext = {
+export const DEFAULT_CONFIG: ConfigInterface = {
   supportedChainIDs: [CHAIN_ETHER],
-  walletLinkAppName: 'UseWeb3',
+  walletLinkAppName: 'useWeb3',
   walletLinkLogoUrl: ''
+}
+
+export const DEFAULT_GLOBAL_CONTEXT: GlobalContextInterface = {
+  ...DEFAULT_CONFIG,
+  connectors: generateConnectors(DEFAULT_CONFIG)
 }
